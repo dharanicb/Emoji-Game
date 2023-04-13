@@ -18,26 +18,21 @@ import EmojiCard from '../EmojiCard/index'
 import WinOrLoseCard from '../WinOrLoseCard/index'
 
 class EmojiGame extends Component {
-  /* state has 3 properties which specify top score, array of clicked emojis details and also 
-    whether gave is over or not if same emoji is clicked/ not clicked respectively */
   state = {
     clickedEmojis: [],
     isGameEnd: false,
     topScore: 0,
   }
 
-  /* a method that shuffles the emojis order randomly  */
-  /* this method gets called each time a emoji is clicked since state gets
-   updates each time a emoji is clicked. SO after every click emojis get shuffled randomly */
-  getShuffledEmojisList = () => {
+  shuffledEmojisList = () => {
     const {emojisList} = this.props
     return emojisList.sort(() => Math.random() - 0.5)
   }
 
-  /* a method for actions to happen when a emoji is clicked  */
   onClickEmoji = id => {
     const {emojisList} = this.props
     const {clickedEmojis} = this.state
+
     const isPresent = clickedEmojis.includes(id)
     if (isPresent) {
       this.finishGameAndSetTopScore(clickedEmojis.length)
@@ -68,14 +63,11 @@ class EmojiGame extends Component {
     this.setState({isGameEnd: value})
   }
 
-  /* a render application to display score once we win/lose the game  */
   renderWinOrLose = () => {
     const {emojisList} = this.props
     const {clickedEmojis} = this.state
     const isWon = emojisList.length === clickedEmojis.length
-    /* we will be sending current score since it is to be displayed one score card is displayed */
-    /* for onClick of play Again button "onClickPlayAgain" is passed so onv=ce the button is clicked 
-    the game gets restated again keeping top score undisturbed  */
+
     return (
       <WinOrLoseCard
         isWon={isWon}
@@ -85,14 +77,10 @@ class EmojiGame extends Component {
     )
   }
 
-  /* render emojis list method gets emojis shuffled list and display 
-  each Emoji by sending data to EmojiCard */
   renderEmojiList = () => {
-    const shuffledEmojiList = this.getShuffledEmojisList()
+    const shuffledEmojiList = this.shuffledEmojisList()
     return (
       <ul className="emoji-list">
-        {/* each item should have a key. we use onClickEmoji method to get the id of clicked emoji from 
-        Emoji Card files */}
         {shuffledEmojiList.map(emojiItem => (
           <EmojiCard
             key={emojiItem.id}
@@ -104,7 +92,6 @@ class EmojiGame extends Component {
     )
   }
 
-  /* main render method of EmojiGame application  */
   render() {
     const {isGameEnd, clickedEmojis, topScore} = this.state
     const currentScore = clickedEmojis.length
