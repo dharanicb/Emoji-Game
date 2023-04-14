@@ -9,7 +9,7 @@ class WinOrLoseCard extends Component {
   render() {
     const {isWon, onClickPlayAgain, score} = this.props
     const imageURL = isWon ? winImage : loseImage
-    const altText = isWon ? 'happyFace' : 'sadFace'
+    const altText = isWon ? 'win' : 'lose'
     const gameStatus = isWon ? 'You Won' : 'You Lose'
     const ScoreLabel = isWon ? 'Best Score' : 'Score'
     return (

@@ -10,12 +10,8 @@ class NavBar extends Component {
     }
     return (
       <div className="Score-container">
-        <p className="score-label">
-          Score : <span className="score-value">{currentScore}</span>
-        </p>
-        <p className="score-label">
-          Total Score : <span className="score-value">{topScore}</span>
-        </p>
+        <p className="score-label">Score: {currentScore}</p>
+        <p className="score-label">Top Score: {topScore}</p>
       </div>
     )
   }
@@ -29,7 +25,7 @@ class NavBar extends Component {
             src="https://assets.ccbp.in/frontend/react-js/game-logo-img.png"
             alt="emoji logo"
           />
-          <p className="logo-title">Emoji Game</p>
+          <h1 className="logo-title">Emoji Game</h1>
         </div>
         {this.renderScores()}
       </div>
